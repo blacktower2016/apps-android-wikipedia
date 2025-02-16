@@ -29,7 +29,7 @@ class Schedule {
     private val scheduleOfWeek = mutableMapOf<Days, MutableList<ScheduleEntity>>()
     private val timeFormatter = ISO_LOCAL_TIME
 
-    private var currentDay = MONDAY
+    private var currentDay: Days = MONDAY
 
     fun monday(function: OnSchedule) = setDay(MONDAY, function)
     fun tuesday(function: OnSchedule) = setDay(TUESDAY, function)
@@ -47,6 +47,10 @@ class Schedule {
         val startTime = LocalTime.parse(this, timeFormatter)
         val endTime = LocalTime.parse(to, timeFormatter)
         return startTime to endTime
+    }
+
+    operator fun invoke(function: OnSchedule) {
+        function()
     }
 
     fun addSchedule(day: Days, scheduleEntity: ScheduleEntity) {
@@ -75,11 +79,6 @@ class Schedule {
     }
 }
 
-fun schedule(init: OnSchedule): Schedule {
-    val schedule = Schedule()
-    schedule.init()
-    return schedule
-}
 
 fun main() {
 
@@ -97,7 +96,7 @@ fun main() {
 
 
     // Так добавляется расписание с использованием DSL
-    schedule = schedule {
+    schedule {
 
         monday {
             "10:30".."11:10" schedule "Biology"
