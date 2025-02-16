@@ -160,13 +160,3 @@ fun main() {
         allOf(sidesAmountIsPositive(), sideIsWithinRange(.01f, 10f), colorIs(Color.RED))
     )
 }
-
-
-
-
-
-
-
-
-
-
