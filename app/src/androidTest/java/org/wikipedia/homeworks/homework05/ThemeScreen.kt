@@ -8,8 +8,6 @@ import io.github.kakaocup.kakao.progress.KSeekBar
 import io.github.kakaocup.kakao.switch.KSwitch
 import io.github.kakaocup.kakao.text.KButton
 import io.github.kakaocup.kakao.text.KTextView
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.*
 import org.wikipedia.R
 import com.google.android.material.R as materialR
 
