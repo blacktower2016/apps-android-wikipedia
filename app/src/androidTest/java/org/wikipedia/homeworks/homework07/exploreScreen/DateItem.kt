@@ -1,4 +1,4 @@
-package org.wikipedia.homeworks.homework07.exploreScreen;
+package org.wikipedia.homeworks.homework07.exploreScreen
 
 import android.view.View
 import io.github.kakaocup.kakao.recycler.KRecyclerItem
