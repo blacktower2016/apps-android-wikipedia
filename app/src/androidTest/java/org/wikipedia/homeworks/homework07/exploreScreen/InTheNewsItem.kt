@@ -20,6 +20,7 @@ class InTheNewsItem(matcher: Matcher<View>) : KRecyclerItem<SearchCardViewItem>(
     }
 
     val items = KRecyclerView(
+        parent = matcher,
         builder = {
             withId(R.id.news_cardview_recycler_view)
         },

@@ -38,7 +38,7 @@ class FeaturedArticleItem(matcher: Matcher<View>) : KRecyclerItem<FeaturedArticl
         withId(R.id.articleExtract)
     }
 
-    val footer = KButton(matcher) {
+    val footer = KButton(matcher) { // or KTextView?
         withId(R.id.footerActionButton)
     }
 }

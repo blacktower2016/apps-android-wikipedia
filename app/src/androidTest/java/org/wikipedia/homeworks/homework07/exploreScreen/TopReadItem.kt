@@ -19,11 +19,12 @@ class TopReadItem(matcher: Matcher<View>) : KRecyclerItem<View>(matcher) {
         withId(R.id.view_list_card_header_menu)
     }
 
-    val footer = KButton(matcher) {
+    val footer = KButton(matcher) {  // or KTextView?
         withId(R.id.footerActionButton)
     }
 
     val items = KRecyclerView(
+        parent = matcher,
         builder = {
             withId(R.id.view_list_card_list)
         },
