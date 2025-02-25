@@ -4,12 +4,11 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
-import org.wikipedia.homeworks.homework08.OnboardingScreen
 import org.wikipedia.homeworks.homework07.ExploreScreen
 import org.wikipedia.homeworks.homework07.exploreScreen.SearchCardViewItem
 import org.wikipedia.homeworks.homework07.exploreScreen.TopReadItem
 import org.wikipedia.homeworks.homework07.exploreScreen.topRead.TopReadBlockInnerItem
-import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerFirstItem
+import org.wikipedia.homeworks.homework08.OnboardingScreen
 import org.wikipedia.main.MainActivity
 
 class ExploreScreenTests : TestCase() {
@@ -24,9 +23,7 @@ class ExploreScreenTests : TestCase() {
     fun simpleTest() {
         run {
             step("Skipping") {
-                OnboardingScreen.slider.childAt<OnboardingPagerFirstItem>(0) {
-                    skipButton.click()
-                }
+                OnboardingScreen.skipButton.click()
             }
             step("Проверяет отображение тулбара") {
                 ExploreScreen.toolbarTitle.isDisplayed()

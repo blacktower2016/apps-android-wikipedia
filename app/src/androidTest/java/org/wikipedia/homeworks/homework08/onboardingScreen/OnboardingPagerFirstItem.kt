@@ -18,41 +18,33 @@ class OnboardingPagerFirstItem(
     val languagesList = KRecyclerView(
         parent = matcher,
         builder = { withId(R.id.languagesList) },
+//        builder = { withId(R.id.languageListContainer) },
         itemTypeBuilder = {
             itemType(::LanguageListItem)
         }
     )
 
-    val addEditLanguagesButton = KButton {
+    val addEditLanguagesButton = KButton(matcher) {
         withId(R.id.addLanguageButton)
     }
 
-    // all except last screen
-    val skipButton = KButton {
-        withId(R.id.fragment_onboarding_skip_button)
-    }
-
-    // all except last
-    val continueButton = KButton {
-        withId(R.id.fragment_onboarding_forward_button)
-    }
 
     val image = KImageView(matcher) {
         withId(R.id.imageViewCentered)
     }
 
     // all screens
-    val currentScreenIndicator = KTabLayout {
+    val currentScreenIndicator = KTabLayout(matcher) {
         withId(R.id.view_onboarding_page_indicator)
     }
 
     // all screens
-    val screenTitle = KTextView {
+    val screenTitle = KTextView(matcher) {
         withId(R.id.primaryTextView)
     }
 
     // all screens
-    val screenText = KTextView {
+    val screenText = KTextView(matcher) {
         withId(R.id.secondaryTextView)
     }
 

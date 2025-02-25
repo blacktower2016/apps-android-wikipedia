@@ -7,7 +7,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.wikipedia.R
 import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerFirstItem
-import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerSecondItem
+import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerMiddleItem
 import org.wikipedia.homeworks.homework08.onboardingScreen.editLanguagesScreen.AddLanguageButtonItem
 import org.wikipedia.homeworks.homework08.onboardingScreen.editLanguagesScreen.AddNewLanguageScreen
 import org.wikipedia.homeworks.homework08.onboardingScreen.editLanguagesScreen.EditLanguageItem
@@ -15,7 +15,6 @@ import org.wikipedia.homeworks.homework08.onboardingScreen.editLanguagesScreen.E
 import org.wikipedia.homeworks.homework08.onboardingScreen.editLanguagesScreen.LanguageWithSubtitleItem
 import org.wikipedia.homeworks.homework08.onboardingScreen.firstItem.LanguageListItem
 import org.wikipedia.main.MainActivity
-import java.lang.Thread.sleep
 
 class OnboardingScreenTest : TestCase() {
 
@@ -34,10 +33,10 @@ class OnboardingScreenTest : TestCase() {
                         }
                         firstChild<LanguageListItem> {
                             step("first child is visible") {
-                                label.isVisible()
+                                isVisible()
                             }
                             step("Contains text") {
-                                label.containsText("English")
+                                containsText("English")
                             }
                         }
                     }
@@ -62,13 +61,10 @@ class OnboardingScreenTest : TestCase() {
     fun pageSwitchTest() {
         run {
             step("Click 'Continue' button") {
-                OnboardingScreen.slider.childAt<OnboardingPagerFirstItem>(0) {
-                    continueButton.click()
-                }
-                sleep(2)
+                OnboardingScreen.continueButton.click()
             }
             step("Verify that second screen is displayed") {
-                OnboardingScreen.slider.childAt<OnboardingPagerSecondItem>(1) {
+                OnboardingScreen.slider.childAt<OnboardingPagerMiddleItem>(1) {
                     isVisible()
                 }
             }
@@ -136,12 +132,12 @@ class OnboardingScreenTest : TestCase() {
                 }
                 step("Check first language in list is English") {
                     languagesList.firstChild<LanguageListItem> {
-                        hasText("English")
+                        containsText("English")
                     }
                 }
                 step("Check last language in list is Russian") {
                     languagesList.lastChild<LanguageListItem> {
-                        hasText("Русский")
+                        containsText("Русский")
                     }
                 }
             }

@@ -2,11 +2,11 @@ package org.wikipedia.homeworks.homework08
 
 import com.kaspersky.kaspresso.screens.KScreen
 import io.github.kakaocup.kakao.pager2.KViewPager2
+import io.github.kakaocup.kakao.text.KButton
 import org.wikipedia.R
 import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerFirstItem
 import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerFourthItem
-import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerSecondItem
-import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerThirdItem
+import org.wikipedia.homeworks.homework08.onboardingScreen.OnboardingPagerMiddleItem
 
 object OnboardingScreen : KScreen<OnboardingScreen>() {
 
@@ -21,9 +21,23 @@ object OnboardingScreen : KScreen<OnboardingScreen>() {
         },
         itemTypeBuilder = {
             itemType(::OnboardingPagerFirstItem)
-            itemType(::OnboardingPagerSecondItem)
-            itemType(::OnboardingPagerThirdItem)
+            itemType(::OnboardingPagerMiddleItem)
             itemType(::OnboardingPagerFourthItem)
         }
     )
+
+    // all except last
+    val skipButton = KButton {
+        withId(R.id.fragment_onboarding_skip_button)
+    }
+
+    // all except last
+    val continueButton = KButton {
+        withId(R.id.fragment_onboarding_forward_button)
+    }
+
+    // last page
+    val getStartedButton = KButton {
+        withId(R.id.fragment_onboarding_done_button)
+    }
 }
