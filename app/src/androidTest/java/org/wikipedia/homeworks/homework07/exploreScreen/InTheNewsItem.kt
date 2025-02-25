@@ -9,7 +9,7 @@ import org.hamcrest.Matcher
 import org.wikipedia.R
 import org.wikipedia.homeworks.homework07.exploreScreen.inTheNews.InTheNewsRecyclerItem
 
-class InTheNewsItem(matcher: Matcher<View>) : KRecyclerItem<SearchCardViewItem>(matcher) {
+class InTheNewsItem(matcher: Matcher<View>) : KRecyclerItem<InTheNewsItem>(matcher) {
 
     val header = KTextView(matcher) {
         withId(R.id.view_card_header_title)

@@ -7,9 +7,8 @@ import io.github.kakaocup.kakao.recycler.KRecyclerItem
 import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
 import org.wikipedia.R
-import org.wikipedia.homeworks.homework07.exploreScreen.TopReadItem
 
-class TopReadBlockInnerItem(matcher: Matcher<View>) : KRecyclerItem<TopReadItem>(matcher) {
+class TopReadBlockInnerItem(matcher: Matcher<View>) : KRecyclerItem<TopReadBlockInnerItem>(matcher) {
     val number = KTextView(matcher) {
         withId(R.id.numberView)
     }

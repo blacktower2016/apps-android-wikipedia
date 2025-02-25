@@ -10,7 +10,7 @@ import org.hamcrest.Matcher
 import org.wikipedia.R
 import org.wikipedia.homeworks.homework07.exploreScreen.topRead.TopReadBlockInnerItem
 
-class TopReadItem(matcher: Matcher<View>) : KRecyclerItem<View>(matcher) {
+class TopReadItem(matcher: Matcher<View>) : KRecyclerItem<TopReadItem>(matcher) {
     val headerTitle = KTextView(matcher) {
         withId(R.id.view_card_header_title)
     }

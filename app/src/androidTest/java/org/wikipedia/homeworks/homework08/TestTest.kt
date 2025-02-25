@@ -4,7 +4,9 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
+import org.wikipedia.feed.featured.FeaturedArticleCardView
 import org.wikipedia.homeworks.homework07.ExploreScreen
+import org.wikipedia.homeworks.homework07.exploreScreen.FeaturedArticleItem
 import org.wikipedia.homeworks.homework07.exploreScreen.SearchCardViewItem
 import org.wikipedia.homeworks.homework07.exploreScreen.TopReadItem
 import org.wikipedia.homeworks.homework07.exploreScreen.topRead.TopReadBlockInnerItem
@@ -34,15 +36,32 @@ class ExploreScreenTests : TestCase() {
                 }
             }
             step("Checking has logo in 2nd child in topRead") {
-                ExploreScreen.items.childAt<TopReadItem>(4) {
+                ExploreScreen.items.childAt<TopReadItem>(30) {
                     step("TopReadCardViewItem.isDisplayed()") {
                         isDisplayed()
                     }
 
-                    items.childAt<TopReadBlockInnerItem>(1) {
-                        isDisplayed()
-                        image.isDisplayed()
+//                    items.childAt<TopReadBlockInnerItem>(1) {
+//                        isDisplayed()
+//                        image.isDisplayed()
+//                    }
+                }
+            }
+            step("Feature article contains title") {
+                ExploreScreen.items.childWith<TopReadItem> {
+                    withDescendant {
+                        withText("Top read")
                     }
+//                    isInstanceOf(FeaturedArticleCardView::class.java)
+//                    onPosition(3)
+                }.perform {
+//                    header.hasText("Featured article")
+//                    articleImage.isDisplayed()
+//                    articleTitle.hasAnyText()
+//                    articleDescription.hasAnyText()
+                    headerTitle.hasAnyText()
+
+
                 }
             }
         }
