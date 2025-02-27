@@ -25,6 +25,11 @@ class TestInTheNewsBlock : TestCase() {
     //  + Проверяем, что отображается элемент с ID page_web_view (элемент объявить как KView а не KWebView с которым мы ещё не умеем пока работать)
     //  3. Для каждого задействованного экрана описать PageObject со всеми значимыми элементами
 
+    // for stability animation is off in build.gradle:
+    //    testOptions {
+    //    animationsDisabled = true
+    //  }
+
     @Test
     fun testInTheNewsBlock() {
         run {
@@ -47,13 +52,15 @@ class TestInTheNewsBlock : TestCase() {
             }
 
             step("Click on the 2nd article in the list") {
-                InTheNewsArticleScreen.items.childAt<InTheNewsItemSimilarArticle>(1) {
-                    click()
+                with(InTheNewsArticleScreen.items) {
+                    childAt<InTheNewsItemSimilarArticle>(1) {
+                        click()
+                    }
                 }
-            }
 
-            step("Verify that element page)web_view is displayed") {
-                ArticleWebViewScreen.pageWebView.isDisplayed()
+                step("Verify that element page)web_view is displayed") {
+                    ArticleWebViewScreen.pageWebView.isDisplayed()
+                }
             }
         }
     }
