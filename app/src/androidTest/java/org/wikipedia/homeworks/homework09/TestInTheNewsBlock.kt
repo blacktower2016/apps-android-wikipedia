@@ -21,8 +21,8 @@ class TestInTheNewsBlock : TestCase() {
     //  + Скипаем онбординг
     //  + Находим блок In the news (по тексту заголовка)
     //  + Листаем до третьей картинки и кликаем по ней
-    //  - Кликаем по второй статье из списка
-    //  - Проверяем, что отображается элемент с ID page_web_view (элемент объявить как KView а не KWebView с которым мы ещё не умеем пока работать)
+    //  + Кликаем по второй статье из списка
+    //  + Проверяем, что отображается элемент с ID page_web_view (элемент объявить как KView а не KWebView с которым мы ещё не умеем пока работать)
     //  3. Для каждого задействованного экрана описать PageObject со всеми значимыми элементами
 
     @Test
@@ -31,8 +31,9 @@ class TestInTheNewsBlock : TestCase() {
             step("Skip Onboarding screen") {
                 OnboardingScreen.skipButton.click()
             }
+
             ExploreScreen.items.childWith<InTheNewsItem> {
-                step("Scroll to in the news block") {
+                step("Scroll to 'in the news' block") {
                     withDescendant {
                         withText("In the news")
                     }
@@ -43,12 +44,11 @@ class TestInTheNewsBlock : TestCase() {
                         image.click()
                     }
                 }
-
             }
 
             step("Click on the 2nd article in the list") {
                 InTheNewsArticleScreen.items.childAt<InTheNewsItemSimilarArticle>(1) {
-                    title.click()
+                    click()
                 }
             }
 
