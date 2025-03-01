@@ -4,6 +4,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
+import org.wikipedia.R
 import org.wikipedia.homeworks.homework07.ExploreScreen
 import org.wikipedia.homeworks.homework07.exploreScreen.InTheNewsItem
 import org.wikipedia.homeworks.homework07.exploreScreen.inTheNews.InTheNewsRecyclerItem
@@ -40,28 +41,25 @@ class TestInTheNewsBlock : TestCase() {
             ExploreScreen.items.childWith<InTheNewsItem> {
                 step("Scroll to 'in the news' block") {
                     withDescendant {
-                        withText("In the news")
+                        withText(R.string.view_card_news_title)
                     }
                 }
-            }.items.perform {
+            }.items.childAt<InTheNewsRecyclerItem>(2) {
                 step("Click on the 3rd image") {
-                    childAt<InTheNewsRecyclerItem>(2) {
-                        image.click()
-                    }
+                    image.click()
                 }
             }
 
             step("Click on the 2nd article in the list") {
-                with(InTheNewsArticleScreen.items) {
-                    childAt<InTheNewsItemSimilarArticle>(1) {
-                        click()
-                    }
-                }
-
-                step("Verify that element page)web_view is displayed") {
-                    ArticleWebViewScreen.pageWebView.isDisplayed()
+                InTheNewsArticleScreen.items.childAt<InTheNewsItemSimilarArticle>(1) {
+                    click()
                 }
             }
+
+            step("Verify that element page)web_view is displayed") {
+                ArticleWebViewScreen.pageWebView.isDisplayed()
+            }
+
         }
     }
 }
