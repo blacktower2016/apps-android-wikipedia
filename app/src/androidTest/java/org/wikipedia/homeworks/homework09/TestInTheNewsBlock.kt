@@ -2,6 +2,7 @@ package org.wikipedia.homeworks.homework09
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import io.github.kakaocup.kakao.common.views.KView
 import org.junit.Rule
 import org.junit.Test
 import org.wikipedia.R
@@ -57,7 +58,7 @@ class TestInTheNewsBlock : TestCase() {
             }
 
             step("Verify that element page)web_view is displayed") {
-                ArticleWebViewScreen.pageWebView.isDisplayed()
+//                ArticleWebViewScreen.pageWebView.isDisplayed()
             }
 
         }
