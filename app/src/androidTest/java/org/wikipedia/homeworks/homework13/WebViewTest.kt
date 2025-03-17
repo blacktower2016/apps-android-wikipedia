@@ -5,7 +5,6 @@ import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import junit.framework.AssertionFailedError
 import org.junit.Rule
 import org.junit.Test
 import org.wikipedia.R
@@ -111,12 +110,10 @@ class WebViewTest : TestCase() {
                     try {
                         WebViewReferenceScreen.referenceTitleText.isNotDisplayed()
                         visible = false
-                    }
-                    catch (ex: AssertionError) {
+                    } catch (ex: AssertionError) {
                         device.uiDevice.pressBack()
                         continue
-                    }
-                    catch (ex: NoMatchingViewException) {
+                    } catch (ex: NoMatchingViewException) {
                         visible = false
                     }
 
@@ -126,7 +123,10 @@ class WebViewTest : TestCase() {
 
             step("Click on 2nd link with css class mw-redirect") {
                 ArticleWebViewScreen.pageWebView {
-                    withElement(Locator.CSS_SELECTOR, ".mw-redirect:nth-child(2)") {
+                    withElement(
+                        Locator.XPATH,
+                        "//body/div/section[1]/p[1]/a[contains(@class, mw-redirect)][2]"
+                    ) {
                         scroll()
                         click()
                     }
