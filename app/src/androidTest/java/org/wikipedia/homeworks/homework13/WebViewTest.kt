@@ -1,9 +1,11 @@
 package org.wikipedia.homeworks.homework13
 
 import android.os.Environment
+import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import junit.framework.AssertionFailedError
 import org.junit.Rule
 import org.junit.Test
 import org.wikipedia.R
@@ -83,8 +85,10 @@ class WebViewTest : TestCase() {
         }.run {
             step("Open reference link 5") {
                 ArticleWebViewScreen.pageWebView {
-                    withElement(Locator.CSS_SELECTOR, "#cite_ref-5 > a") {
-//                        scroll()
+//                    withElement(Locator.CSS_SELECTOR, "#cite_ref-5 > a") {
+                    withElement(Locator.CSS_SELECTOR, "#cite_ref-5  a") {
+                        scroll()
+                        makeScreenshot()
 //                        hasText("[5]")
                         click()
                     }
@@ -93,21 +97,37 @@ class WebViewTest : TestCase() {
             }
             step("Verify reference popup title") {
                 WebViewReferenceScreen.referenceId {
-                    containsText("Reference")
+                    containsText("5.")
                 }
             }
             step("Verify reference number") {
                 WebViewReferenceScreen.referenceTitleText {
-                    containsText("5.")
+                    containsText("Reference")
                 }
             }
             step("Press back") {
-                device.exploit.pressBack()
+                var visible = true
+                while (visible) {
+                    try {
+                        WebViewReferenceScreen.referenceTitleText.isNotDisplayed()
+                        visible = false
+                    }
+                    catch (ex: AssertionError) {
+                        device.uiDevice.pressBack()
+                        continue
+                    }
+                    catch (ex: NoMatchingViewException) {
+                        visible = false
+                    }
+
+
+                }
             }
 
             step("Click on 2nd link with css class mw-redirect") {
                 ArticleWebViewScreen.pageWebView {
                     withElement(Locator.CSS_SELECTOR, ".mw-redirect:nth-child(2)") {
+                        scroll()
                         click()
                     }
                 }
