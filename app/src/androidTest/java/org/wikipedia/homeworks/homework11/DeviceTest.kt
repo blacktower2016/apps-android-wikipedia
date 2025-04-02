@@ -4,7 +4,9 @@ import android.os.Environment
 import androidx.compose.ui.test.hasText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.components.alluresupport.withForcedAllureSupport
 import com.kaspersky.kaspresso.device.exploit.Exploit
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule
@@ -17,7 +19,7 @@ import org.wikipedia.homeworks.homework11.article_offline.ArticleOfflineScreen
 import org.wikipedia.main.MainActivity
 import java.util.Locale
 
-class DeviceTest : TestCase() {
+class DeviceTest : TestCase(Kaspresso.Builder.withForcedAllureSupport()) {
 
     // TODO:
     //  2. Написать тесты по уже имеющимся экранам, но с применением методов управления девайсом:

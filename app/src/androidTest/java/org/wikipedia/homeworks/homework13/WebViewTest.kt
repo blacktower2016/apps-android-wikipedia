@@ -4,6 +4,8 @@ import android.os.Environment
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.kaspersky.components.alluresupport.withForcedAllureSupport
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -14,7 +16,7 @@ import org.wikipedia.homeworks.homework08.OnboardingScreen
 import org.wikipedia.homeworks.homework09.article.ArticleWebViewScreen
 import org.wikipedia.main.MainActivity
 
-class WebViewTest : TestCase() {
+class WebViewTest : TestCase(Kaspresso.Builder.withForcedAllureSupport()) {
     @get:Rule
     val activityScenarioRule: ActivityScenarioRule<MainActivity> =
         ActivityScenarioRule(MainActivity::class.java)
@@ -56,7 +58,8 @@ class WebViewTest : TestCase() {
     fun refLocator(num: Int): String {
 //        return "//*[@class='reference-link'][contains(@style, 'mw-Ref %s;')]".format(num)
 //        return "//sup[@id='cite_ref-%s']/a".format(num)
-        return "#cite_ref-%s > a".format(num)
+//        return "#cite_ref-%s a".format(num)
+        return "//*[@id='cite_ref-%s']//a".format(num)
     }
 
 
@@ -85,7 +88,7 @@ class WebViewTest : TestCase() {
             step("Open reference link 5") {
                 ArticleWebViewScreen.pageWebView {
 //                    withElement(Locator.CSS_SELECTOR, "#cite_ref-5 > a") {
-                    withElement(Locator.CSS_SELECTOR, "#cite_ref-5  a") {
+                    withElement(Locator.XPATH, refLocator(5)) {
                         scroll()
                         makeScreenshot()
 //                        hasText("[5]")
@@ -161,4 +164,14 @@ class WebViewTest : TestCase() {
             "app/build/screenshots"
         )
     }
+//
+//    @After
+//    fun pullReports(): Unit {
+//        val currentCanonicalName = this.javaClass.canonicalName
+//        device.files.pull(
+//            Environment.getExternalStorageDirectory().absolutePath +
+//                    "/Documents/allure-reports/",
+//            "app/build/allure-reports/"
+//        )
+//    }
 }
