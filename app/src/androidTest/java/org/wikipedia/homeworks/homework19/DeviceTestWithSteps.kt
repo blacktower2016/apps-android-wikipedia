@@ -95,10 +95,14 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
             val steps = Steps(this)
             steps {
                 openFeaturedArticle()
-                verifyArticleScreenOffline()
+                with(ArticleOfflineScreen) {
+                    isDisplayed(retryButton, "button Retry")
+                    isDisplayed(errorText, "error text")
+                    isDisplayed(image, "offline image")
+                }
                 enableNetwork()
                 click(ArticleOfflineScreen.retryButton, "button 'Retry'")
-                Thread.sleep(2000)
+                sleep(2000)
                 flakySafely {
                     isDisplayed(ArticleWebViewScreen.title, "title")
                 }
