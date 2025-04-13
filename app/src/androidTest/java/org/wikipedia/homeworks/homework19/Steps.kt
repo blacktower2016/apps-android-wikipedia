@@ -8,13 +8,10 @@ import io.github.kakaocup.kakao.check.CheckableActions
 import io.github.kakaocup.kakao.check.CheckableAssertions
 import io.github.kakaocup.kakao.common.assertions.BaseAssertions
 import io.github.kakaocup.kakao.edit.EditableActions
-import io.github.kakaocup.kakao.recycler.KRecyclerItem
-import io.github.kakaocup.kakao.recycler.KRecyclerView
 import io.github.kakaocup.kakao.text.TextViewAssertions
 import org.hamcrest.MatcherAssert.assertThat
 import org.wikipedia.homeworks.homework07.ExploreScreen
 import org.wikipedia.homeworks.homework07.exploreScreen.FeaturedArticleItem
-import org.wikipedia.homeworks.homework11.article_offline.ArticleOfflineScreen
 
 // TODO: Домашнее задание №19. Унифицированные шаги.
 //

@@ -34,7 +34,6 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
                 device.exploit.setOrientation(Exploit.DeviceOrientation.Portrait)
             }
             .run {
-                val steps = Steps(textContext = this)
                 steps {
                     verifyLandscapeOrientation()
                     rotateDevice()
@@ -50,7 +49,6 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
         }.after {
             device.uiDevice.wakeUp()
         }.run {
-            val steps = Steps(this)
             steps {
                 isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
                 wakeUpDevice()
@@ -62,7 +60,6 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
     @Test
     fun testAppAfterMinimizing() {
         run {
-            val steps = Steps(this)
             steps {
                 isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
                 pressHome()
@@ -76,7 +73,6 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
     @Test
     fun testMainActivityIsActive() {
         run {
-            val steps = Steps(this)
             steps {
                 click(OnboardingScreen.skipButton, "button 'Skip'")
                 verifyCurrentActivity(MainActivity::class.java)
@@ -92,7 +88,6 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
         }.after {
             device.network.enable()
         }.run {
-            val steps = Steps(this)
             steps {
                 openFeaturedArticle()
                 with(ArticleOfflineScreen) {
