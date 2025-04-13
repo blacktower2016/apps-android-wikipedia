@@ -1,24 +1,17 @@
 package org.wikipedia.homeworks.homework19
 
-import android.os.Environment
-import androidx.compose.ui.test.hasText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.alluresupport.withForcedAllureSupport
 import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.wikipedia.homeworks.homework07.ExploreScreen
-import org.wikipedia.homeworks.homework07.exploreScreen.FeaturedArticleItem
 import org.wikipedia.homeworks.homework08.OnboardingScreen
 import org.wikipedia.homeworks.homework09.article.ArticleWebViewScreen
 import org.wikipedia.homeworks.homework11.article_offline.ArticleOfflineScreen
 import org.wikipedia.main.MainActivity
-import java.util.Locale
 
 class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()) {
 

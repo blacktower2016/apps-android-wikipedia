@@ -2,8 +2,6 @@ package org.wikipedia.homeworks.homework19
 
 import android.app.Activity
 import com.kaspersky.kaspresso.device.exploit.Exploit
-import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProvider
-import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import io.github.kakaocup.kakao.common.actions.BaseActions
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import io.github.kakaocup.kakao.check.CheckableActions
@@ -15,8 +13,6 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.wikipedia.homeworks.homework07.ExploreScreen
 import org.wikipedia.homeworks.homework07.exploreScreen.FeaturedArticleItem
 import org.wikipedia.homeworks.homework11.article_offline.ArticleOfflineScreen
-import org.wikipedia.main.MainActivity
-import kotlin.math.truncate
 
 // TODO: Домашнее задание №19. Унифицированные шаги.
 //
