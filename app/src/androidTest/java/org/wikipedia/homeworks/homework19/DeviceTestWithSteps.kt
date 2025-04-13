@@ -35,9 +35,11 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
             }
             .run {
                 val steps = Steps(textContext = this)
-                steps.verifyLandscapeOrientation()
-                steps.rotateDevice()
-                steps.verifyPortraitOrientation()
+                steps {
+                    verifyLandscapeOrientation()
+                    rotateDevice()
+                    verifyPortraitOrientation()
+                }
             }
     }
 
@@ -49,9 +51,11 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
             device.uiDevice.wakeUp()
         }.run {
             val steps = Steps(this)
-            steps.isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
-            steps.wakeUpDevice()
-            steps.isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
+            steps {
+                isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
+                wakeUpDevice()
+                isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
+            }
         }
     }
 
@@ -59,11 +63,13 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
     fun testAppAfterMinimizing() {
         run {
             val steps = Steps(this)
-            steps.isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
-            steps.pressHome()
-            steps.pressRecentApps()
-            steps.pressRecentApps()
-            steps.isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
+            steps {
+                isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
+                pressHome()
+                pressRecentApps()
+                pressRecentApps()
+                isDisplayed(OnboardingScreen.skipButton, "button 'Skip'")
+            }
         }
     }
 
@@ -71,8 +77,10 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
     fun testMainActivityIsActive() {
         run {
             val steps = Steps(this)
-            steps.click(OnboardingScreen.skipButton, "button 'Skip'")
-            steps.verifyCurrentActivity(MainActivity::class.java)
+            steps {
+                click(OnboardingScreen.skipButton, "button 'Skip'")
+                verifyCurrentActivity(MainActivity::class.java)
+            }
         }
     }
 
@@ -85,13 +93,15 @@ class DeviceTestWithSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport()
             device.network.enable()
         }.run {
             val steps = Steps(this)
-            steps.openFeaturedArticle()
-            steps.verifyArticleScreenOffline()
-            steps.enableNetwork()
-            steps.click(ArticleOfflineScreen.retryButton, "button 'Retry'")
-            Thread.sleep(2000)
-            flakySafely {
-                steps.isDisplayed(ArticleWebViewScreen.title, "title")
+            steps {
+                openFeaturedArticle()
+                verifyArticleScreenOffline()
+                enableNetwork()
+                click(ArticleOfflineScreen.retryButton, "button 'Retry'")
+                Thread.sleep(2000)
+                flakySafely {
+                    isDisplayed(ArticleWebViewScreen.title, "title")
+                }
             }
         }
     }

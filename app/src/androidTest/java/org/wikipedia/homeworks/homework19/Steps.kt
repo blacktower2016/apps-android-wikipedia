@@ -39,6 +39,10 @@ import org.wikipedia.homeworks.homework11.article_offline.ArticleOfflineScreen
 
 class Steps(private val textContext: TestContext<*>) {
 
+    operator fun invoke(function: Steps.() -> Unit) {
+        function()
+    }
+
     fun click(element: BaseActions, name: String) {
         textContext.step("Click on element '$name'") {
             element.click()
