@@ -7,9 +7,8 @@ import io.github.kakaocup.kakao.recycler.KRecyclerView
 import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
 import org.wikipedia.R
-import org.wikipedia.homeworks.homework07.exploreScreen.inTheNews.InTheNewsRecyclerItem
-import org.wikipedia.homeworks.homework20.setName
-import org.wikipedia.homeworks.homework20.withParent
+import org.wikipedia.homeworks.homework08.OnboardingScreen.withParent
+import org.wikipedia.homeworks.homework20.InTheNewsRecyclerItem
 
 class InTheNewsItem(matcher: Matcher<View>) : KRecyclerItem<InTheNewsItem>(matcher) {
 
@@ -19,8 +18,10 @@ class InTheNewsItem(matcher: Matcher<View>) : KRecyclerItem<InTheNewsItem>(match
         }.setName(withParent("Header"))
     }
 
-    val headerMenu = KImageView(matcher) {
-        withId(R.id.view_list_card_header_menu)
+    val headerMenu by lazy {
+        KImageView(matcher) {
+            withId(R.id.view_list_card_header_menu)
+        }.setName(withParent("header menu"))
     }
 
     val items by lazy {

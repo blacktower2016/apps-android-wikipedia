@@ -1,19 +1,14 @@
 package org.wikipedia.homeworks.homework20
 
 import android.app.Activity
-import com.kaspersky.kaspresso.device.exploit.Exploit
+import androidx.compose.ui.test.hasText
 import io.github.kakaocup.kakao.common.actions.BaseActions
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
-import io.github.kakaocup.kakao.check.CheckableActions
-import io.github.kakaocup.kakao.check.CheckableAssertions
 import io.github.kakaocup.kakao.common.assertions.BaseAssertions
 import io.github.kakaocup.kakao.common.utilities.getResourceString
-import io.github.kakaocup.kakao.edit.EditableActions
 import io.github.kakaocup.kakao.recycler.KRecyclerItem
 import io.github.kakaocup.kakao.recycler.KRecyclerView
-import io.github.kakaocup.kakao.text.TextViewAssertions
 import org.hamcrest.MatcherAssert.assertThat
-import org.wikipedia.R
 import org.wikipedia.homeworks.homework07.ExploreScreen
 import org.wikipedia.homeworks.homework07.exploreScreen.FeaturedArticleItem
 import org.wikipedia.homeworks.homework07.exploreScreen.InTheNewsItem
@@ -53,36 +48,61 @@ class NamedSteps(private val textContext: TestContext<*>) {
         }
     }
 
-    fun childWithText(items: KRecyclerView, text: String) {
+    fun <T> childWithText(items: KRecyclerView, text: String) {
         textContext.step("Scroll to '$text' block of '${items.getName()}'") {
-        items.childWith<InTheNewsItem> {
-                withDescendant {
-                    withText(text)
-                }
-            }
+            items.getWithDescendantText<KRecyclerItem<T>>(text)
         }
     }
 
-    fun <T : KRecyclerItem<*>> childWithText(items: KRecyclerView, textId: Int): T {
-
-        return items.childWith<KRecyclerItem<T>> {
-            textContext.step("Get block of '${items.getName()}' with text '${getResourceString(textId)}'")
-            {
-                withDescendant {
-                    withText(textId)
-                }
-            }
-        } as T
+    fun <T> childWithText(items: KRecyclerView, textId: Int): T {
+        return items.getWithDescendantText<KRecyclerItem<T>>(textId) as T
     }
 
-    fun <T : KRecyclerItem<*>> childAt(items: KRecyclerView, position: Int, function: T.() -> Unit): Unit {
+    fun <T> childWithText(
+        items: KRecyclerView,
+        textId: Int,
+        function: KRecyclerItem<T>.() -> Unit
+    ): Unit {
+        textContext.step("Get block of '${items.getName()}' with text '${getResourceString(textId)}'")
+        {
+            items.invokeWithDescendantText<KRecyclerItem<T>>(textId, function) as T
+        }
+    }
+
+    fun <T> childWithText(
+        items: KRecyclerView,
+        text: String,
+        function: KRecyclerItem<T>.() -> Unit
+    ): Unit {
+        textContext.step("Get block of '${items.getName()}' with text '$text'")
+        {
+            items.invokeWithDescendantText<KRecyclerItem<T>>(text, function) as T
+        }
+    }
+
+
+    fun <T : KRecyclerItem<*>> childAt(
+        items: KRecyclerView,
+        position: Int,
+        function: KRecyclerItem<T>.() -> Unit
+    ): Unit {
         textContext.step("Find $position block of '${items.getName()}'") {
-            items.childAt<KRecyclerItem<T>>(position) {
-                perform {
-                    function()
-                }
-            }
+            items.invokeAtIndex<KRecyclerItem<T>>(
+                position = position,
+                function = function
+            )
         }
+    }
+
+    fun <T : KRecyclerItem<*>> childAt(
+        items: KRecyclerView,
+        position: Int
+    ): T {
+//        textContext.step("Find $position block of '${items.getName()}'") {
+            return items.getWithIndex<KRecyclerItem<T>>(
+                position = position,
+            ) as T
+//        }
     }
 
     fun isDisplayed(element: BaseAssertions) {
@@ -149,7 +169,7 @@ class NamedSteps(private val textContext: TestContext<*>) {
         textContext.step("Open featured article") {
             ExploreScreen.items.childWith<FeaturedArticleItem> {
                 withDescendant {
-                    androidx.compose.ui.test.hasText("Featured article")
+                    hasText("Featured article")
                 }
             }.articleTitle.click()
         }

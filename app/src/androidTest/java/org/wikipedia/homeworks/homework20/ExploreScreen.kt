@@ -6,7 +6,6 @@ import io.github.kakaocup.kakao.recycler.KRecyclerView
 import org.wikipedia.R
 import org.wikipedia.homeworks.homework07.exploreScreen.DateItem
 import org.wikipedia.homeworks.homework07.exploreScreen.FeaturedArticleItem
-import org.wikipedia.homeworks.homework07.exploreScreen.InTheNewsItem
 import org.wikipedia.homeworks.homework07.exploreScreen.SearchCardViewItem
 
 

@@ -9,30 +9,37 @@ import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
 import org.wikipedia.R
 import org.wikipedia.homeworks.homework07.exploreScreen.topRead.TopReadBlockInnerItem
+import org.wikipedia.homeworks.homework08.OnboardingScreen.withParent
 
 class TopReadItem(matcher: Matcher<View>) : KRecyclerItem<TopReadItem>(matcher) {
     val headerTitle by lazy {
         KTextView(matcher) {
             withId(R.id.view_card_header_title)
-        }.withParent("Header title")
+        }.setName(withParent("Header title"))
     }
 
-    val headerMenu = KImageView(matcher) {
-        withId(R.id.view_list_card_header_menu)
+    val headerMenu by lazy {
+        KImageView(matcher) {
+            withId(R.id.view_list_card_header_menu)
+        }.setName(withParent("header menu"))
     }
 
-    val footer = KButton(matcher) {  // or KTextView?
-        withId(R.id.footerActionButton)
+    val footer by lazy {
+        KButton(matcher) {  // or KTextView?
+            withId(R.id.footerActionButton)
+        }.setName(withParent("footer"))
     }
 
-    val items = KRecyclerView(
-        parent = matcher,
-        builder = {
-            withId(R.id.view_list_card_list)
-        },
-        itemTypeBuilder = {
-            itemType(::TopReadBlockInnerItem)
-        }
-    )
+    val items by lazy {
+        KRecyclerView(
+            parent = matcher,
+            builder = {
+                withId(R.id.view_list_card_list)
+            },
+            itemTypeBuilder = {
+                itemType(::TopReadBlockInnerItem)
+            }
+        ).setName(withParent("top read block"))
+    }
 
 }

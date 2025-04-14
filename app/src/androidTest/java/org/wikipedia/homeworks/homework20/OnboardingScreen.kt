@@ -15,29 +15,37 @@ object OnboardingScreen : NamedKScreen<OnboardingScreen>() {
 
     // TODO 2. Описать экран Onboarding по всем правилам (слайды экрана в пейджере KViewPager2,
     //  аналогично ресайклеру), список языков в ресайклере.
-    val slider = KViewPager2(
-        builder = {
-            withId(R.id.fragment_pager)
-        },
-        itemTypeBuilder = {
-            itemType(::OnboardingPagerFirstItem)
-            itemType(::OnboardingPagerMiddleItem)
-            itemType(::OnboardingPagerFourthItem)
-        }
-    )
+    val slider by lazy {
+        KViewPager2(
+            builder = {
+                withId(R.id.fragment_pager)
+            },
+            itemTypeBuilder = {
+                itemType(::OnboardingPagerFirstItem)
+                itemType(::OnboardingPagerMiddleItem)
+                itemType(::OnboardingPagerFourthItem)
+            }
+        ).setName(withParent("slider"))
+    }
 
     // all except last
-    val skipButton = KButton {
-        withId(R.id.fragment_onboarding_skip_button)
-    }.setName(withParent("button 'Skip'"))
+    val skipButton by lazy {
+        KButton {
+            withId(R.id.fragment_onboarding_skip_button)
+        }.setName(withParent("button 'Skip'"))
+    }
 
     // all except last
-    val continueButton = KButton {
-        withId(R.id.fragment_onboarding_forward_button)
+    val continueButton by lazy {
+        KButton {
+            withId(R.id.fragment_onboarding_forward_button)
+        }.setName(withParent("continue button"))
     }
 
     // last page
-    val getStartedButton = KButton {
-        withId(R.id.fragment_onboarding_done_button)
+    val getStartedButton by lazy {
+        KButton {
+            withId(R.id.fragment_onboarding_done_button)
+        }.setName(withParent("get started button"))
     }
 }

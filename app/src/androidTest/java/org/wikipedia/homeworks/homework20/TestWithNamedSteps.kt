@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.wikipedia.R
-import org.wikipedia.homeworks.homework07.exploreScreen.InTheNewsItem
-import org.wikipedia.homeworks.homework07.exploreScreen.inTheNews.InTheNewsRecyclerItem
+import org.wikipedia.homeworks.homework20.InTheNewsItem
+import org.wikipedia.homeworks.homework20.InTheNewsRecyclerItem
 import org.wikipedia.homeworks.homework09.InTheNewsArticleScreen
 import org.wikipedia.homeworks.homework09.InTheNewsItemSimilarArticle
 import org.wikipedia.homeworks.homework09.article.ArticleWebViewScreen
@@ -32,23 +32,24 @@ class TestWithNamedSteps : TestCase(Kaspresso.Builder.withForcedAllureSupport())
         run {
             steps {
                 click(OnboardingScreen.skipButton)
-                childAt<InTheNewsRecyclerItem>(
-                    childWithText<InTheNewsItem>(
-                        ExploreScreen.items,
-                        R.string.view_card_news_title
-                    ).items,
-                    2
-                ) {
-                    click(image)
-                }
+                val innerItems = childWithText<InTheNewsItem>(
+                    ExploreScreen.items,
+                    R.string.view_card_news_title
+                ).items
+
+                click(
+                    childAt<InTheNewsRecyclerItem>(
+                        innerItems, 2
+                    )
+                )
 
                 childAt<InTheNewsItemSimilarArticle>(InTheNewsArticleScreen.items, 1) {
                     click()
                 }
 
-                step("Verify that element page)web_view is displayed") {
-                ArticleWebViewScreen.pageWebView
-                }
+//                step("Verify that element page)web_view is displayed") {
+//                    ArticleWebViewScreen.pageWebView
+//                }
             }
 
         }
