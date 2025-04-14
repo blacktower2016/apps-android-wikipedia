@@ -13,9 +13,11 @@ import org.wikipedia.homeworks.homework20.withParent
 
 class InTheNewsItem(matcher: Matcher<View>) : KRecyclerItem<InTheNewsItem>(matcher) {
 
-    val header = KTextView(matcher) {
-        withId(R.id.view_card_header_title)
-    }.setName(withParent("Header"))
+    val header by lazy {
+        KTextView(matcher) {
+            withId(R.id.view_card_header_title)
+        }.setName(withParent("Header"))
+    }
 
     val headerMenu = KImageView(matcher) {
         withId(R.id.view_list_card_header_menu)
